@@ -1,0 +1,75 @@
+version: '3'
+services:
+  #PHP Service
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: manzanav/php
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "6001:6001"
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    working_dir: /var/www/backend
+    volumes:
+      - ./:/var/www
+      - ./backend/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./backend/supervisor.d:/etc/supervisor/conf.d
+    networks:
+      - manzanav-network
+
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: webserver_candy
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./backend/nginx/conf.d/app.conf:/etc/nginx/nginx.conf
+    networks:
+      - manzanav-network
+
+  #MySQL Service
+  db:
+    image: mysql:5.7.22
+    container_name: dbmanzanav
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: manzanav
+      MYSQL_ROOT_PASSWORD: secret
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./backend/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - manzanav-network
+
+  #Redis Service
+  redis:
+    image: redis:alpine
+    networks:
+      - manzanav-network
+
+#Docker Network
+networks:
+  manzanav-network:
+    driver: bridge
+
+#Volumnes
+volumes:
+  dbdata:
+    driver: local
