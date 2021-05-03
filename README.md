@@ -58,6 +58,8 @@ Con este comando se instalarán las dependencias del proyecto. Luego se debe con
 npm run serve
 ```
 Este comando utiliza el puerto 8080.
+### Nota
+Se utilizó de base para el desarrollo del aplicativo web el ui kit proporcionado por CoreUI en su versión gratuita.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
