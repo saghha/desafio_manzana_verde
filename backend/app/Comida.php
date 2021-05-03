@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Casts\DecimalCast;
 
 class Comida extends Model
 {
@@ -46,7 +45,7 @@ class Comida extends Model
         'nombre' => 'string',
         'descripcion' => 'string',
         'url_photo' => 'string',
-        'precio' => DecimalCast::class,
+        'precio' => 'float'
     ];
 
     /**

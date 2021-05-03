@@ -28,7 +28,8 @@ Object.keys(rules).forEach(rule => {
   extend(rule, rules[rule]);
 });
 
-axios.defaults.baseURL = 'http://localhost/api'
+axios.defaults.baseURL = process.env.VUE_APP_API_ENDPOINT
+console.log(process.env.VUE_APP_API_ENDPOINT)
 
 router.beforeEach((to, from, next) => {
   store.dispatch('authenticate').then(() => {

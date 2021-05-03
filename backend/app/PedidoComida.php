@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Casts\DecimalCast;
 
 class PedidoComida extends Model
 {
@@ -44,7 +43,7 @@ class PedidoComida extends Model
         'id_pedido' => 'string',
         'id_comida' => 'string',
         'cantidad' => 'integer',
-        'precio' => DecimalCast::class,
+        'precio' => 'float',
     ];
 
     /**

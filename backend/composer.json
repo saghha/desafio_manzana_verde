@@ -15,7 +15,6 @@
         "laravel/framework": "^7.0",
         "laravel/sanctum": "^2.10",
         "laravel/tinker": "^2.0",
-        "php-decimal/php-decimal": "^1.1",
         "waavi/sanitizer": "~1.0"
     },
     "require-dev": {

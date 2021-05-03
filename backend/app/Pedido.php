@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Casts\DecimalCast;
 
 class Pedido extends Model
 {
@@ -50,7 +49,7 @@ class Pedido extends Model
      */
     protected $casts = [
         'id_cliente' => 'integer',
-        'precio_pedido' => DecimalCast::class,
+        'precio_pedido' => 'float',
         'notas' => 'string',
         'tipo_entrega' => 'string',
         'pagado' => 'boolean',
